@@ -2,36 +2,6 @@
 A gradle template to use as a base for Minecraft b1.7.3 plugin development, including utility classes for common plugin tasks and convenience.
 
 ---
-## Usage
-While the project may be compatible with other Integrated Development Environments (IDEs), it is highly recommended to use IntelliJ IDEA by JetBrains for optimal performance.
-
-**JDK 8 Required**: This project is built upon JDK 8. Ensure that your development environment is set up with JDK 8 or a compatible version.
-
-> [!NOTE]
-> 1. Update `src/main/resources/plugin.yml` with your plugin details.
-> 2. Update `settings.gradle` with your plugin name.
-> 3. Update/Remove `.github/FUNDING.yml`.
-
----
-## How To Clone
-1. **Via VCS**:
-    - Open IntelliJ IDEA.
-    - Go to `File > New > Project from Version Control`.
-    - If you're on the dashboard home screen of the IDE, click `CLONE FROM VCS` on the top-right button.
-    - In the `URL` field, paste the repository link:
-      ```
-      https://github.com/AleksandarHaralanov/gradle-plugin-template
-      ```
-    - Rename your project to have your desired plugin name.
-    - Click `Clone` to download the project.
-
-2. **Via Git**:
-    - Open your terminal and run the following command:
-      ```bash
-      git clone https://github.com/AleksandarHaralanov/gradle-plugin-template.git <project-name>
-      ```
-
----
 ## Features
 ### Convenience
 - **[build.gradle](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/build.gradle)**:
@@ -68,3 +38,33 @@ While the project may be compatible with other Integrated Development Environmen
 - **[UpdateUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/UpdateUtil.java)**:
     - **Purpose**: Manages plugin updates.
     - **Usage**: Monitors and checks for updates, notifying owners in console if a new version is available.
+
+---
+## How To Clone
+1. **Via VCS**:
+    - Open IntelliJ IDEA.
+    - Go to `File > New > Project from Version Control`.
+    - If you're on the dashboard home screen of the IDE, click `CLONE FROM VCS` on the top-right button.
+    - In the `URL` field, paste the repository link:
+      ```
+      https://github.com/AleksandarHaralanov/gradle-plugin-template
+      ```
+    - Rename your project to have your desired plugin name.
+    - Click `Clone` to download the project.
+
+2. **Via Git**:
+    - Open your terminal and run the following command:
+      ```bash
+      git clone https://github.com/AleksandarHaralanov/gradle-plugin-template.git <project-name>
+      ```
+
+---
+## Usage
+While the project may be compatible with other Integrated Development Environments (IDEs), it is highly recommended to use IntelliJ IDEA by JetBrains for optimal performance.
+
+**JDK 8 Required**: This project is built upon JDK 8. Ensure that your development environment is set up with JDK 8 or a compatible version.
+
+> [!NOTE]
+> 1. Update `src/main/resources/plugin.yml` with your plugin details.
+> 2. Update `settings.gradle` with your plugin name.
+> 3. Update/Remove `.github/FUNDING.yml`.
