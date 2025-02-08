@@ -1,6 +1,7 @@
 # Gradle Plugin Template
 A gradle template to use as a base for Minecraft b1.7.3 plugin development, including utility classes for common plugin tasks and convenience.
 
+---
 ## Usage
 While the project may be compatible with other Integrated Development Environments (IDEs), it is highly recommended to use IntelliJ IDEA by JetBrains for optimal performance.
 
@@ -11,7 +12,8 @@ While the project may be compatible with other Integrated Development Environmen
 > 2. Update `settings.gradle` with your plugin name.
 > 3. Update/Remove `.github/FUNDING.yml`.
 
-### How To Clone
+---
+## How To Clone
 1. **Via VCS**:
     - Open IntelliJ IDEA.
     - Go to `File > New > Project from Version Control`.
@@ -29,6 +31,7 @@ While the project may be compatible with other Integrated Development Environmen
       git clone https://github.com/AleksandarHaralanov/gradle-plugin-template.git <project-name>
       ```
 
+---
 ## Features
 ### Convenience
 - **[build.gradle](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/build.gradle)**:
