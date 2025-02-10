@@ -40,6 +40,14 @@ A gradle template to use as a base for Minecraft b1.7.3 plugin development, incl
     - **Usage**: Monitors and checks for updates, notifying owners in console if a new version is available.
 
 ---
+## Contributing Code & Reporting Issues
+Consider helping this template become even more versatile and robust.
+
+Visit the [CONTRIBUTING](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/.github/CONTRIBUTING.md) guide for details on how to get started and where to focus your efforts.
+
+For any issues with the template, or suggestions, please report them [here](https://github.com/AleksandarHaralanov/gradle-plugin-template/issues).
+
+---
 ## How To Clone
 1. **Via VCS**:
     - Open IntelliJ IDEA.
