@@ -1,5 +1,6 @@
 package org.example.plugin.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
 
@@ -9,22 +10,22 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.logging.Logger;
 
-import static org.bukkit.Bukkit.getServer;
-
 /**
  * Utility class for managing plugin configuration files.
  * <p>
- * This class extends {@link Configuration} to provide custom methods for loading, saving, and managing
- * configuration files. It automatically handles the creation of parent directories and copies default configuration
- * files from the plugin's resources if they do not exist.
- * <p>
- * <b>Note:</b> This class allows for flexible management of multiple configuration files, specified by their file name.
+ * Extends {@link Configuration} to provide custom methods for loading, saving, and managing configuration
+ * files. It automatically handles the creation of parent directories and copies default configuration files from the
+ * plugin's resources if they do not exist.
+ *
+ * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ *
+ * @author Aleksandar Haralanov (@AleksandarHaralanov)
  */
-public class ConfigUtil extends Configuration {
+public final class ConfigUtil extends Configuration {
 
+    private static final Logger logger = Bukkit.getServer().getLogger();
     private final File configFile;
     private final String pluginName;
-    private static final Logger logger = getServer().getLogger();
 
     /**
      * Constructs a new instance of {@code ConfigUtil}.
@@ -56,12 +57,14 @@ public class ConfigUtil extends Configuration {
     public void load() {
         createParentDirectories();
 
-        if (!configFile.exists()) copyDefaultConfig();
+        if (!configFile.exists()) {
+            copyDefaultConfig();
+        }
 
         try {
             super.load();
         } catch (Exception e) {
-            logger.severe(String.format("[%s] Failed to load config '%s': %s", pluginName, configFile.getName(), e.getMessage()));
+            logger.severe(String.format("[%s] Failed to load configuration '%s': %s", pluginName, configFile.getName(), e.getMessage()));
         }
     }
 
@@ -75,7 +78,7 @@ public class ConfigUtil extends Configuration {
         try {
             Files.createDirectories(configFile.getParentFile().toPath());
         } catch (IOException e) {
-            logger.severe(String.format("[%s] Failed to create default config directory: %s", pluginName, e.getMessage()));
+            logger.severe(String.format("[%s] Failed to create default configuration directory: %s", pluginName, e.getMessage()));
         }
     }
 
@@ -91,14 +94,14 @@ public class ConfigUtil extends Configuration {
 
         try (InputStream input = getClass().getResourceAsStream(resourcePath)) {
             if (input == null) {
-                logger.severe(String.format("[%s] Default config '%s' wasn't found.", pluginName, configFile.getName()));
+                logger.severe(String.format("[%s] Default configuration '%s' wasn't found.", pluginName, configFile.getName()));
                 return;
             }
 
             Files.copy(input, configFile.toPath());
-            logger.info(String.format("[%s] Default config '%s' created successfully.", pluginName, configFile.getName()));
+            logger.info(String.format("[%s] Default configuration '%s' created successfully.", pluginName, configFile.getName()));
         } catch (IOException e) {
-            logger.severe(String.format("[%s] Failed to create default config '%s': %s", pluginName, configFile.getName(), e.getMessage()));
+            logger.severe(String.format("[%s] Failed to create default configuration '%s': %s", pluginName, configFile.getName(), e.getMessage()));
         }
     }
 
@@ -108,12 +111,12 @@ public class ConfigUtil extends Configuration {
      * Calls {@link #load()} to load the configuration file and logs a message indicating whether the configuration
      * was loaded successfully.
      */
-    public void loadConfig() {
+    public void loadAndLog() {
         try {
             this.load();
-            logger.info(String.format("[%s] Config '%s' loaded successfully.", pluginName, configFile.getName()));
+            logger.info(String.format("[%s] Configuration '%s' loaded successfully.", pluginName, configFile.getName()));
         } catch (Exception e) {
-            logger.severe(String.format("[%s] Failed to load config '%s': %s", pluginName, configFile.getName(), e.getMessage()));
+            logger.severe(String.format("[%s] Failed to load configuration '%s': %s", pluginName, configFile.getName(), e.getMessage()));
         }
     }
 
@@ -123,12 +126,12 @@ public class ConfigUtil extends Configuration {
      * Attempts to save the configuration using the superclass' {@code save()} method and logs a message indicating
      * whether the configuration was saved successfully.
      */
-    public void saveConfig() {
+    public void saveAndLog() {
         try {
             this.save();
-            logger.info(String.format("[%s] Config '%s' saved successfully.", pluginName, configFile.getName()));
+            logger.info(String.format("[%s] Configuration '%s' saved successfully.", pluginName, configFile.getName()));
         } catch (Exception e) {
-            logger.severe(String.format("[%s] Failed to save config '%s': %s", pluginName, configFile.getName(), e.getMessage()));
+            logger.severe(String.format("[%s] Failed to save configuration '%s': %s", pluginName, configFile.getName(), e.getMessage()));
         }
     }
 }

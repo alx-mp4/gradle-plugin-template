@@ -1,5 +1,7 @@
 package org.example.plugin.util;
 
+import org.bukkit.Bukkit;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Color;
 import java.io.IOException;
@@ -13,12 +15,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import static org.bukkit.Bukkit.getServer;
+/**
+ * Utility class for sending messages and embeds to a Discord webhook.
+ * <p>
+ * Provides methods for setting up a Discord webhook message with content, username, avatar, text-to-speech (TTS)
+ * options, and rich embed objects.
+ *
+ * @see <a href="https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb">Ron's DiscordWebhook GitHub Gist</a>
+ *
+ * @author Ron (@k3kdude)
+ */
+public final class DiscordUtil {
 
-// Thanks to k3kdude @ https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb
-public class DiscordUtil {
-
-    private static final Logger logger = getServer().getLogger();
+    private static final Logger logger = Bukkit.getServer().getLogger();
     private final String url;
     private String content;
     private String username;
@@ -51,7 +60,9 @@ public class DiscordUtil {
     }
 
     public void execute() throws IOException {
-        if (this.content == null && this.embeds.isEmpty()) logger.warning("Set content or add at least one EmbedObject!");
+        if (this.content == null && this.embeds.isEmpty()) {
+            logger.warning("Set content or add at least one EmbedObject!");
+        }
 
         JSONObject json = new JSONObject();
 
@@ -62,10 +73,8 @@ public class DiscordUtil {
 
         if (!this.embeds.isEmpty()) {
             List<JSONObject> embedObjects = new ArrayList<>();
-
             for (EmbedObject embed : this.embeds) {
                 JSONObject jsonEmbed = new JSONObject();
-
                 jsonEmbed.put("title", embed.getTitle());
                 jsonEmbed.put("description", embed.getDescription());
                 jsonEmbed.put("url", embed.getUrl());
@@ -87,7 +96,6 @@ public class DiscordUtil {
 
                 if (footer != null) {
                     JSONObject jsonFooter = new JSONObject();
-
                     jsonFooter.put("text", footer.getText());
                     jsonFooter.put("icon_url", footer.getIconUrl());
                     jsonEmbed.put("footer", jsonFooter);
@@ -95,21 +103,18 @@ public class DiscordUtil {
 
                 if (image != null) {
                     JSONObject jsonImage = new JSONObject();
-
                     jsonImage.put("url", image.getUrl());
                     jsonEmbed.put("image", jsonImage);
                 }
 
                 if (thumbnail != null) {
                     JSONObject jsonThumbnail = new JSONObject();
-
                     jsonThumbnail.put("url", thumbnail.getUrl());
                     jsonEmbed.put("thumbnail", jsonThumbnail);
                 }
 
                 if (author != null) {
                     JSONObject jsonAuthor = new JSONObject();
-
                     jsonAuthor.put("name", author.getName());
                     jsonAuthor.put("url", author.getUrl());
                     jsonAuthor.put("icon_url", author.getIconUrl());
@@ -119,15 +124,13 @@ public class DiscordUtil {
                 List<JSONObject> jsonFields = new ArrayList<>();
                 for (EmbedObject.Field field : fields) {
                     JSONObject jsonField = new JSONObject();
-
                     jsonField.put("name", field.getName());
                     jsonField.put("value", field.getValue());
                     jsonField.put("inline", field.isInline());
-
                     jsonFields.add(jsonField);
                 }
-
                 jsonEmbed.put("fields", jsonFields.toArray());
+
                 embedObjects.add(jsonEmbed);
             }
 
@@ -155,7 +158,6 @@ public class DiscordUtil {
         private String description;
         private String url;
         private Color color;
-
         private Footer footer;
         private Thumbnail thumbnail;
         private Image image;
@@ -339,7 +341,9 @@ public class DiscordUtil {
         private final HashMap<String, Object> map = new HashMap<>();
 
         void put(String key, Object value) {
-            if (value != null) map.put(key, value);
+            if (value != null) {
+                map.put(key, value);
+            }
         }
 
         @Override
@@ -352,15 +356,20 @@ public class DiscordUtil {
             for (Map.Entry<String, Object> entry : entrySet) {
                 Object val = entry.getValue();
                 builder.append(quote(entry.getKey())).append(":");
-
-                if (val instanceof String) builder.append(quote(String.valueOf(val)));
-                else if (val instanceof Integer) builder.append(Integer.valueOf(String.valueOf(val)));
-                else if (val instanceof Boolean) builder.append(val);
-                else if (val instanceof JSONObject) builder.append(val);
-                else if (val.getClass().isArray()) {
+                if (val instanceof String) {
+                    builder.append(quote(String.valueOf(val)));
+                } else if (val instanceof Integer) {
+                    builder.append(Integer.valueOf(String.valueOf(val)));
+                } else if (val instanceof Boolean) {
+                    builder.append(val);
+                } else if (val instanceof JSONObject) {
+                    builder.append(val);
+                } else if (val.getClass().isArray()) {
                     builder.append("[");
                     int len = Array.getLength(val);
-                    for (int j = 0; j < len; j++) builder.append(Array.get(val, j).toString()).append(j != len - 1 ? "," : "");
+                    for (int j = 0; j < len; j++) {
+                        builder.append(Array.get(val, j).toString()).append(j != len - 1 ? "," : "");
+                    }
                     builder.append("]");
                 }
 

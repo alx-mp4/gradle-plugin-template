@@ -1,7 +1,7 @@
 package org.example.plugin.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,56 +11,54 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
-import static org.bukkit.Bukkit.getServer;
-
 /**
  * Utility class for logging messages to the server console and managing a log file.
  * <p>
- * This class provides static methods for logging informational, warning, and severe messages
- * to the server's logger, simplifying the process of logging by avoiding the need to directly
- * access the logger. Additionally, it manages a log file within the plugin's data folder where
- * custom log messages can be written.
- * <p>
- * By using this utility, you can log messages with a single method call, making your code cleaner
- * and easier to maintain. You can also initialize and manage a log file for additional logging purposes.
+ * Provides methods for logging info, warning, and severe messages through the server's logger into the console,
+ * simplifying the process of logging by avoiding the need to directly access the logger.
+ * Additionally, it allows to manage log files within the plugin's data folder where custom log messages can be written.
+ *
+ * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ *
+ * @author Aleksandar Haralanov (@AleksandarHaralanov)
  */
-public class LoggerUtil extends Configuration {
+public final class LogUtil {
 
+    private static final Logger logger = Bukkit.getServer().getLogger();
     private static File logFile;
     private static String pluginName;
-    private static final Logger logger = getServer().getLogger();
 
     /**
      * Constructs a LoggerUtil instance.
      * <p>
-     * This constructor initializes the LoggerUtil with the plugin's data folder and a specified
-     * log file name. It also retrieves the plugin's name from its description for use in log messages.
+     * This constructor initializes the LoggerUtil with the plugin's data folder and a specified log file name.
+     * It also retrieves the plugin's name from its description for use in log messages.
      *
-     * @param plugin   the plugin instance, used to access its data folder and description
-     * @param fileName the name of the log file to be used for logging messages
+     * @param plugin      the plugin instance, used to access its data folder and description
+     * @param logFileName the name of the log file to be used for logging messages
      */
-    public LoggerUtil(JavaPlugin plugin, String fileName) {
-        super(new File(plugin.getDataFolder(), fileName));
-        logFile = new File(plugin.getDataFolder(), fileName);
+    public LogUtil(JavaPlugin plugin, String logFileName) {
+        logFile = new File(plugin.getDataFolder(), logFileName);
         pluginName = plugin.getDescription().getName();
     }
 
     /**
      * Initializes the log file.
      * <p>
-     * This method checks if the log file exists in the plugin's data folder. If it does not exist,
-     * it attempts to create the file. If the file is successfully created, an informational log message
-     * is generated. If the file creation fails, a severe log message is logged.
+     * This method checks if the log file exists in the plugin's data folder. If it does not exist, it attempts to
+     * create the file. If the file is successfully created, an informational log message is generated. If the file
+     * creation fails, a severe log message is logged.
      */
     public void initializeLog() {
-        if (!logFile.exists())
+        if (!logFile.exists()) {
             try {
                 if (logFile.createNewFile()) {
                     logger.info(String.format("[%s] Log '%s' created successfully.", pluginName, logFile.getName()));
                 }
             } catch (IOException e) {
-                logger.severe(String.format("[%s] Could not create log '%s': %s", pluginName, logFile.getName(), e.getMessage()));
+                logger.severe(String.format("[%s] Failed to create log '%s': %s", pluginName, logFile.getName(), e.getMessage()));
             }
+        }
     }
 
     /**
@@ -72,15 +70,16 @@ public class LoggerUtil extends Configuration {
      * @param text        the text to write to the log file
      * @param logDateTime if {@code true}, prepends the current date and time to the log entry
      */
-    public static void writeToLog(String text, boolean logDateTime) {
+    public static void writeToLogFile(String text, boolean logDateTime) {
         String logEntry;
         if (logDateTime) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String timestamp = now.format(formatter);
-
             logEntry = String.format("[%s] %s", timestamp, text);
-        } else logEntry = text;
+        } else {
+            logEntry = text;
+        }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
             writer.write(logEntry);
@@ -97,7 +96,7 @@ public class LoggerUtil extends Configuration {
      *
      * @param message the message to log
      */
-    public static void logInfo(String message) {
+    public static void logConsoleInfo(String message) {
         logger.info(message);
     }
 
@@ -109,7 +108,7 @@ public class LoggerUtil extends Configuration {
      *
      * @param message the message to log
      */
-    public static void logWarning(String message) {
+    public static void logConsoleWarning(String message) {
         logger.warning(message);
     }
 
@@ -120,7 +119,7 @@ public class LoggerUtil extends Configuration {
      *
      * @param message the message to log
      */
-    public static void logSevere(String message) {
+    public static void logConsoleSevere(String message) {
         logger.severe(message);
     }
 }

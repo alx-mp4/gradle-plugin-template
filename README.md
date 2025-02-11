@@ -2,42 +2,27 @@
 A gradle template to use as a base for Minecraft b1.7.3 plugin development, including utility classes for common plugin tasks and convenience.
 
 ---
-## Features
-### Convenience
-- **[build.gradle](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/build.gradle)**:
-    - Names the plugin's compiled `.jar` file using the plugin's name and version directly from the `plugin.yml` configuration.
-- **[Plugin](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/Plugin.java)**:
-    - Includes the `onEnable` and `onDisable` methods for the plugin's functionality.
-    - Loggers that utilize the plugin's name and version for when the plugin is enabled and disabled.
+## Utility Classes
+- **[AboutUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/AboutUtil.java)**:
+    - Provides methods to display detailed information about a plugin—including its name, version, description, website, author(s), and contributor(s)—to a player or the server console.
 
-### Utility Classes
-- **[AboutUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/AboutUtil.java)**:
-    - **Purpose**: Provides methods to easily access information about the plugin, such as its name, version, authors, contributors, and description.
-    - **Usage**: Use this utility to display plugin information in console logs, help commands, or any other context where plugin details are required.
+- **[AccessUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/AccessUtil.java)**:
+    - Provides methods to check permissions and enforce command usage restrictions based on the sender's type.
 
-- **[AccessUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/AccessUtil.java)**:
-    - **Purpose**: Provides utility methods to interact with permissions, commands, and other access control aspects in the plugin.
-    - **Usage**: Helps manage permissions, check user permissions, and handle command execution in a standardized way.
+- **[ColorUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/ColorUtil.java)**:
+    - Provides a method to scan text for color codes prefixed with an ampersand `&` and replace them with the appropriate Minecraft color code format using the section sign `§` symbol.
 
-- **[ColorUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/ColorUtil.java)**:
-    - **Purpose**: Formats text messages with color codes compatible with Minecraft.
-    - **Usage**: Style text messages for players or logs using color codes.
+- **[ConfigUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/ConfigUtil.java)**:
+    - Provides methods for loading, saving, and managing configuration files. It automatically handles the creation of parent directories and copies default configuration files from the plugin's resources if they do not exist.
 
-- **[ConfigUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/ConfigUtil.java)**:
-    - **Purpose**: Handles configuration file reading and writing.
-    - **Usage**: Use to manage plugin configuration files, loading configuration data at startup and saving changes at shutdown.
+- **[DiscordUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/DiscordUtil.java)**:
+    - Provides methods for setting up a Discord webhook message with content, username, avatar, text-to-speech (TTS) options, and rich embed objects.
 
-- **[DiscordUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/DiscordUtil.java)**:
-    - **Purpose**: Facilitates interaction with Discord services.
-    - **Usage**: Helps send messages to Discord channels or get information from Discord.
+- **[LogUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/LogUtil.java)**:
+    - Provides methods for logging info, warning, and severe messages through the server's logger into the console, simplifying the process of logging by avoiding the need to directly access the logger. Additionally, it allows to manage log files within the plugin's data folder where custom log messages can be written.
 
-- **[LoggerUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/LoggerUtil.java)**:
-    - **Purpose**: Provides a unified logging utility for the plugin.
-    - **Usage**: Standardizes logging across the plugin, using the plugin's name and version.
-
-- **[UpdateUtil](https://github.com/AleksandarHaralanov/Gradle-Plugin-Template/blob/master/src/main/java/org/example/plugin/util/UpdateUtil.java)**:
-    - **Purpose**: Manages plugin updates.
-    - **Usage**: Monitors and checks for updates, notifying owners in console if a new version is available.
+- **[UpdateUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/UpdateUtil.java)**:
+    - Provides a method to query the GitHub API for the latest release version and compares it with the current plugin version. It logs messages to the console indicating whether an update is available or if the plugin is up to date.
 
 ---
 ## Contributing Code & Reporting Issues
@@ -68,11 +53,21 @@ For any issues with the template, or suggestions, please report them [here](http
 
 ---
 ## Usage
+### Setup Project
 While the project may be compatible with other Integrated Development Environments (IDEs), it is highly recommended to use IntelliJ IDEA by JetBrains for optimal performance.
 
 **JDK 8 Required**: This project is built upon JDK 8. Ensure that your development environment is set up with JDK 8 or a compatible version.
 
-> [!NOTE]
-> 1. Update `src/main/resources/plugin.yml` with your plugin details.
-> 2. Update `settings.gradle` with your plugin name.
-> 3. Update/Remove `.github/FUNDING.yml`.
+> [!IMPORTANT]
+> 1. Update package names `org.example.plugin` accordingly.
+> 2. Update `src/main/resources/plugin.yml` with your plugin details.
+> 3. Update `settings.gradle` with your plugin name.
+
+Once you finish developing your plugin, follow these steps to build your project using Gradle:
+
+1. **Open Gradle:** Click on the Gradle tab located in the right-side menu bar.
+2. **Locate the Build Task:** Expand the `Tasks/build` section and double-click on the `build` task to start the build process.
+3. **Find Your Plugin's JAR:** After the build completes, a new `build` directory will appear in your project. Navigate to `build/libs` where you'll find your plugin's `.jar` file.
+
+> [!TIP]
+> Always run the `clean` task from the build tasks before running the `build` task to ensure a fresh build.
