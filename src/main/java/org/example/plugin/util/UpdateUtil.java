@@ -30,12 +30,12 @@ public final class UpdateUtil {
     private UpdateUtil() {}
 
     /**
-     * Checks for updates by querying a given GitHub API URL and comparing the current version with the latest
-     * available version.
+     * Checks for updates by querying a given GitHub API URL and comparing the current version with the latest available
+     * version.
      * <p>
-     * This method formats the current version by appending {@code v} to the front of it, as this is the convention
-     * used in GitHub release tags. It then compares the formatted version with the latest version retrieved from
-     * the GitHub API. If an update is available, it logs information about the new version and a download link.
+     * This method formats the current version by appending {@code v} to the front of it, as this is the convention used
+     * in GitHub release tags. It then compares the formatted version with the latest version retrieved from the GitHub
+     * API. If an update is available, it logs information about the new version and a download link.
      * <p>
      * <b>Warning:</b> This method only works with GitHub repositories. Ensure that the GitHub API URL points to
      * the latest release information of your repository.
@@ -72,7 +72,10 @@ public final class UpdateUtil {
             String formattedCurrentVersion = "v" + pdf.getVersion();
             compareVersions(pdf.getName(), formattedCurrentVersion, latestVersion, githubApiUrl);
         } catch (IOException | URISyntaxException e) {
-            logger.severe(String.format("[%s] Exception occurred while checking for a new version: %s", pdf.getName(), e.getMessage()));
+            logger.severe(String.format(
+                    "[%s] Exception occurred while checking for a new version: %s",
+                    pdf.getName(), e.getMessage()
+            ));
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -90,9 +93,15 @@ public final class UpdateUtil {
      */
     private static void handleResponseError(String pluginName, int responseCode) {
         if (responseCode == 403 || responseCode == 429) {
-            logger.warning(String.format("[%s] Rate limited, can't check for a new plugin version. This should resolve itself within an hour.", pluginName));
+            logger.warning(String.format(
+                    "[%s] Rate limited, can't check for a new plugin version. This should resolve itself within an hour.",
+                    pluginName
+            ));
         } else {
-            logger.warning(String.format("[%s] Unexpected response code: %s. Unable to check for a new plugin version.", pluginName, responseCode));
+            logger.warning(String.format(
+                    "[%s] Unexpected response code: %s. Unable to check for a new plugin version.",
+                    pluginName, responseCode
+            ));
         }
     }
 
@@ -141,8 +150,14 @@ public final class UpdateUtil {
 
         if (!pluginVersion.equalsIgnoreCase(latestVersion)) {
             String downloadLink = githubApiUrl.replace("api.github.com/repos", "github.com");
-            logger.info(String.format("[%s] New stable %s available. You are running an outdated or experimental %s.", pluginName, latestVersion, pluginVersion));
-            logger.info(String.format("[%s] Download the latest stable version from: %s", pluginName, downloadLink));
+            logger.info(String.format(
+                    "[%s] New stable %s available. You are running an outdated or experimental %s.",
+                    pluginName, latestVersion, pluginVersion
+            ));
+            logger.info(String.format(
+                    "[%s] Download the latest stable version from: %s",
+                    pluginName, downloadLink
+            ));
         } else {
             logger.info(String.format("[%s] You are running the latest version.", pluginName));
         }
