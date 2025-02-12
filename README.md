@@ -3,25 +3,25 @@ A gradle template to use as a base for Minecraft b1.7.3 plugin development, incl
 
 ---
 ## Utility Classes
-- **[AboutUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/AboutUtil.java)**:
+- **[AboutUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/AboutUtil.java)**:
     - Provides methods to display detailed information about a plugin—including its name, version, description, website, author(s), and contributor(s)—to a player or the server console.
 
-- **[AccessUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/AccessUtil.java)**:
+- **[AccessUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/AccessUtil.java)**:
     - Provides methods to check permissions and enforce command usage restrictions based on the sender's type.
 
-- **[ColorUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/ColorUtil.java)**:
+- **[ColorUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/ColorUtil.java)**:
     - Provides a method to scan text for color codes prefixed with an ampersand `&` and replace them with the appropriate Minecraft color code format using the section sign `§` symbol.
 
-- **[ConfigUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/ConfigUtil.java)**:
+- **[ConfigUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/ConfigUtil.java)**:
     - Provides methods for loading, saving, and managing configuration files. It automatically handles the creation of parent directories and copies default configuration files from the plugin's resources if they do not exist.
 
-- **[DiscordUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/DiscordUtil.java)**:
+- **[DiscordUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/DiscordUtil.java)**:
     - Provides methods for setting up a Discord webhook message with content, username, avatar, text-to-speech (TTS) options, and rich embed objects.
 
-- **[LogUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/LogUtil.java)**:
+- **[LogUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/LogUtil.java)**:
     - Provides methods for logging info, warning, and severe messages through the server's logger into the console, simplifying the process of logging by avoiding the need to directly access the logger. Additionally, it allows to manage log files within the plugin's data folder where custom log messages can be written.
 
-- **[UpdateUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/1dfd192aef0cc06febd9a042807599241937cd85/src/main/java/org/example/plugin/util/UpdateUtil.java)**:
+- **[UpdateUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/UpdateUtil.java)**:
     - Provides a method to query the GitHub API for the latest release version and compares it with the current plugin version. It logs messages to the console indicating whether an update is available or if the plugin is up to date.
 
 ---
