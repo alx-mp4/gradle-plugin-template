@@ -42,7 +42,9 @@ public final class AccessUtil {
         boolean hasPermission = sender.hasPermission(permission);
         boolean isOp = sender.isOp();
         if (!(hasPermission || isOp)) {
-            sender.sendMessage(ColorUtil.translateColorCodes(String.format("&c%s", noPermissionMessage)));
+            sender.sendMessage(ColorUtil.translateColorCodes(String.format(
+                    "&c%s", noPermissionMessage
+            )));
             return false;
         }
 
@@ -84,7 +86,10 @@ public final class AccessUtil {
      */
     public static boolean denyIfNotPlayer(CommandSender sender, JavaPlugin plugin) {
         if (!(sender instanceof Player)) {
-            logger.info(String.format("[%s] You must be in-game to run this command.", plugin.getDescription().getName()));
+            logger.info(String.format(
+                    "[%s] You must be in-game to run this command.",
+                    plugin.getDescription().getName()
+            ));
             return true;
         }
 
@@ -106,7 +111,8 @@ public final class AccessUtil {
     public static boolean denyIfNotConsole(CommandSender sender, JavaPlugin plugin) {
         if (sender instanceof Player) {
             sender.sendMessage(ColorUtil.translateColorCodes(String.format(
-                    "&c[%s] You can't run this command in-game.", plugin.getDescription().getName()
+                    "&c[%s] You can't run this command in-game.",
+                    plugin.getDescription().getName()
             )));
             return true;
         }
