@@ -57,23 +57,15 @@ For any issues with the template, or suggestions, please report them [here](http
 While the project may be compatible with other Integrated Development Environments (IDEs), it is highly recommended to use [IntelliJ IDEA by JetBrains](https://www.jetbrains.com/idea/) for optimal performance.
 
 **JDK 1.8 Required:** This project is built upon JDK 1.8. Ensure that your development environment is set up with JDK 1.8.
-1. Click on `File` from the top-left menu.
-2. Click on `Settings...`.
-3. Drill into `Build, Execution, Deployment` > `Build Tools` > `Gradle`.
-4. Click on the drop-down menu of `Gradle JVM`.
-5. Click on `Download JDK...`.
-6. Set JDK settings:
-   - Version to `1.8`.
-   - Vendor to `Eclipse Temurin`.
-   - Leave location as default.
-7. Make sure `Gradle JVM` is now set to the JDK you just downloaded.
-8. Click `Apply` then `OK`.
-9. Click on `File` from the top-left menu again.
-10. Click on `Project Structure...`.
-11. Set Project settings:
-    - SDK to `1.8`.
-    - Language level to `SDK default`.
-12. Click `Apply` then `OK`.
+1. Set Up the Gradle JVM:
+    - Open **File > Settings > Build, Execution, Deployment > Build Tools > Gradle**.
+    - In the **Gradle JVM** dropdown, select **Download JDK**. 
+    - Choose **JDK 1.8** (Vendor: **Eclipse Temurin**) and use the default location. 
+    - Ensure the newly downloaded JDK is selected, then click **Apply** and **OK**.
+2. Configure the Project SDK:
+   - Open **File > Project Structure**.
+   - Under Project Settings, set the **SDK** to **1.8** and **Language Level** to **SDK default**.
+   - Click **Apply** and **OK**.
 
 > [!IMPORTANT]
 > 1. Update package names `org.example.plugin` accordingly.
