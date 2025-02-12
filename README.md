@@ -60,11 +60,11 @@ While the project may be compatible with other Integrated Development Environmen
 1. **Set Up the Gradle JVM:**
     - Open **File > Settings > Build, Execution, Deployment > Build Tools > Gradle**.
     - In the **Gradle JVM** dropdown, select **Download JDK**. 
-    - Choose **JDK 1.8** (Vendor: **Eclipse Temurin**) and use the default location. 
+    - Choose JDK Version **1.8**, Vendor is **Eclipse Temurin**, and use the default location. 
     - Ensure the newly downloaded JDK is selected, then click **Apply** and **OK**.
 2. **Configure the Project SDK:**
    - Open **File > Project Structure**.
-   - Under Project Settings, set the **SDK** to **1.8** and **Language Level** to **SDK default**.
+   - Under Project Settings, set the SDK to **1.8** and Language Level to **SDK default**.
    - Click **Apply** and **OK**.
 
 > [!IMPORTANT]
