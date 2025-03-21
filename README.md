@@ -76,7 +76,11 @@ While the project may be compatible with other Integrated Development Environmen
 > - If you plan on publishing this plugin, you should update the documents within `.github` accordingly.
 
 > [!NOTE]
-> By default, I've left the API to be CraftBukkit 1060. If you wish to use [Project Poseidon](https://github.com/retromcorg/Project-Poseidon) or [UberBukkit](https://github.com/Moresteck/uberbukkit), you may find the newest releases for them as of March 22, 2025, in the `api` directory. Alternatively, you can go to their respective GitHub repositories and download the newest stable release.
+> I've set the default API as CraftBukkit 1060.
+> 
+> If you wish to use [Project Poseidon](https://github.com/retromcorg/Project-Poseidon) or [UberBukkit](https://github.com/Moresteck/uberbukkit), you can go to their respective GitHub repositories and download the newest stable release.
+> 
+> Then you can replace `craftbukkit-1060.jar` inside the `libs` directory with your chosen API and edit the `build.gradle` dependency.
 
 ### Build Project
 Once you finish developing your plugin, follow these steps to build your project using Gradle:
