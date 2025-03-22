@@ -76,7 +76,7 @@ While the project may be compatible with other Integrated Development Environmen
 > - If you plan on publishing this plugin, you should update the documents within `.github` accordingly.
 
 > [!NOTE]
-> I've set the default API as CraftBukkit 1060.
+> I've set the default API as CraftBukkit 1060 (CB1060).
 > 
 > If you wish to use [Project Poseidon](https://github.com/retromcorg/Project-Poseidon) or [UberBukkit](https://github.com/Moresteck/uberbukkit), you can go to their respective GitHub repositories and download the newest stable release.
 > 
