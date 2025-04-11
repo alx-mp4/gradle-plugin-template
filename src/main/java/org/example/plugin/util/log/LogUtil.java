@@ -53,10 +53,12 @@ public final class LogUtil {
         if (!logFile.exists()) {
             try {
                 if (logFile.createNewFile()) {
-                    logger.info(String.format("[%s] Log '%s' created successfully.", pluginName, logFile.getName()));
+                    logger.info(String.format("[%s] Log '%s' created successfully.",
+                            pluginName, logFile.getName()));
                 }
             } catch (IOException e) {
-                logger.severe(String.format("[%s] Failed to create log '%s': %s", pluginName, logFile.getName(), e.getMessage()));
+                logger.severe(String.format("[%s] Failed to create log '%s': %s",
+                        pluginName, logFile.getName(), e.getMessage()));
             }
         }
     }
@@ -85,7 +87,8 @@ public final class LogUtil {
             writer.write(logEntry);
             writer.newLine();
         } catch (IOException e) {
-            logger.severe(String.format("[%s] Could not write to log '%s': %s", pluginName, logFile.getName(), e.getMessage()));
+            logger.severe(String.format("[%s] Could not write to log '%s': %s",
+                    pluginName, logFile.getName(), e.getMessage()));
         }
     }
 
