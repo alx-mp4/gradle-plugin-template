@@ -37,13 +37,25 @@ if (!nameMatcher.find()) {
     throw new GradleException("The 'name' attribute wasn't found in the 'plugin.yml' file.")
 }
 
-tasks.named('build') {
-    mustRunAfter 'clean'
-}
+tasks.build { dependsOn tasks.clean }
 
 tasks.register('cleanBuild') {
-    dependsOn 'clean', 'build'
     group = 'custom'
+    dependsOn 'clean', 'build'
+}
+
+def pluginsPath = 'INSERT_ABSOLUTE_PATH_TO_SERVER_PLUGINS_FOLDER'
+
+tasks.register("deletePluginJar", Delete) {
+    group = 'custom'
+    delete(files(pluginsPath + "${project.name}-${project.version}.jar")) // Or just ${project.name}.jar depending on how you've set it down below
+}
+
+tasks.register('replacePluginJar', Copy) {
+    group = 'custom'
+    from 'build/libs'
+    into pluginsPath
+    dependsOn 'clean', 'build', 'deletePluginJar'
 }
 
 jar {
