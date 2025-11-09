@@ -34,7 +34,7 @@ tasks.register('cleanShadowJar') {
     dependsOn 'clean', 'shadowJar'
 }
 
-def pluginsPath = 'D:/Beta/CB1060/plugins/'
+def pluginsPath = 'INSERT_ABSOLUTE_PLUGINS_PATH'
 
 tasks.register("deletePluginJar", Delete) {
     group = 'shadow'
