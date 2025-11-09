@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
  * Provides methods to display detailed information about a plugin—including its name, version, description, website,
  * author(s), and contributor(s)—to a player or the server console.
  *
- * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ * @see <a href="https://github.com/alx-mp4">Aleks' GitHub</a>
  *
- * @author Aleksandar Haralanov (@AleksandarHaralanov)
+ * @author Aleks (@alx-mp4)
  */
 public final class AboutUtil {
 
@@ -79,13 +79,15 @@ public final class AboutUtil {
      * @return a formatted string of contributors, or {@code null} if the list is {@code null} or empty
      */
     private static String formatContributors(List<String> contributorsList) {
-        if (contributorsList == null || contributorsList.isEmpty()) {
-            return null;
-        }
+        if (contributorsList == null) return null;
 
-        return contributorsList.size() == 1 ? contributorsList.get(0) : contributorsList.stream()
-                .map(contributor -> "&e" + contributor)
-                .collect(Collectors.joining("&7, &e"));
+        String joined = contributorsList.stream()
+                .map(s -> s == null ? "" : s.trim())
+                .filter(s -> !s.isEmpty())
+                .map(s -> "&7" + s)
+                .collect(Collectors.joining("&7, &7"));
+
+        return joined.isEmpty() ? null : joined;
     }
 
     /**

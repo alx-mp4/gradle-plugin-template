@@ -20,6 +20,9 @@ All included utility classes are accompanied by well-written javadocs.
 - **[DiscordUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/log/DiscordUtil.java)**:
     - Provides methods for setting up a Discord webhook message with content, username, avatar, text-to-speech (TTS) options, and rich embed objects.
 
+- **[EffectUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/misc/EffectUtil.java)**:
+    - Provides a method for displaying block break (step sound) particle effects to a specific player. It encodes the block’s ID and data value into the format used by Minecraft Beta 1.7.3, enabling accurate visual effects for different block variants such as colored wool or wood types.
+
 - **[LogUtil](https://github.com/AleksandarHaralanov/gradle-plugin-template/blob/master/src/main/java/org/example/plugin/util/log/LogUtil.java)**:
     - Provides methods for logging info, warning, and severe messages through the server's logger into the console, simplifying the process of logging by avoiding the need to directly access the logger. Additionally, it allows to manage log files within the plugin's data folder where custom log messages can be written.
 
@@ -83,16 +86,20 @@ While the project may be compatible with other Integrated Development Environmen
 > Then you can replace `craftbukkit-1060.jar` inside the `libs` directory with your chosen API and edit the `build.gradle` dependency.
 
 ### Build Project
-Once you finish developing your plugin, follow these steps to build your project using Gradle:
-
-- Click on the Gradle tab located in the right-side menu bar.
-- Expand the `Tasks/custom` section and double-click on the `cleanBuild` task to start your first clean build process.
-- After the process completes, a new `build` directory will appear in your project.
-- Navigate to `build/libs` where you'll find your plugin's `.jar` file.
-- You can now drag and drop your plugin into the `plugins` directory of your Minecraft b1.7.3 server.
+Once you finish developing your plugin, follow these steps to build and deploy it automatically using Gradle:
+- Open the Gradle tab from the right-side menu in your IDE.
+- Expand the `Tasks/custom` section.
+- Double-click on the `replacePluginJar` task — it will:
+  - Clean the project
+  - Build a fresh `.jar`
+  - Delete any previous version from your server’s `plugins` folder
+  - Copy the new `.jar` directly into the server’s `plugins` directory
+- Once it completes, simply start your Minecraft b1.7.3 server to load the updated plugin.
 
 > [!IMPORTANT]
-> When you plan to test your plugin again, after a change you've performed, you should be running the `cleanBuild` task and then retrieve the updated `.jar` file from `build/libs`, ready to be used.
+> Set the pluginsPath variable in your build.gradle to point to your server’s plugins folder, for example:
+> 
+> `def pluginsPath = 'C:/MinecraftServer/plugins/'`
 
 > [!TIP]
 > If you want to exclude your plugin's version, retrieved from `plugin.yml`, from the plugin `.jar` file name, edit the `archiveFileName` field in `build.gradle` to `"${project.name}.jar"`.

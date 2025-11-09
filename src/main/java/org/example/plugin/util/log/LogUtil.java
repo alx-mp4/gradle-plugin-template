@@ -18,9 +18,9 @@ import java.util.logging.Logger;
  * simplifying the process of logging by avoiding the need to directly access the logger.
  * Additionally, it allows to manage log files within the plugin's data folder where custom log messages can be written.
  *
- * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ * @see <a href="https://github.com/alx-mp4">Aleks' GitHub</a>
  *
- * @author Aleksandar Haralanov (@AleksandarHaralanov)
+ * @author Aleks (@alx-mp4)
  */
 public final class LogUtil {
 

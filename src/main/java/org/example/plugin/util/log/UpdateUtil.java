@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  * Provides a method to query the GitHub API for the latest release version and compares it with the current plugin version.
  * It logs messages to the console indicating whether an update is available or if the plugin is up to date.
  *
- * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ * @see <a href="https://github.com/alx-mp4">Aleks' GitHub</a>
  *
- * @author Aleksandar Haralanov (@AleksandarHaralanov)
+ * @author Aleks (@alx-mp4)
  */
 public final class UpdateUtil {
 

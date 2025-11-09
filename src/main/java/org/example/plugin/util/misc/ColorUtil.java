@@ -6,9 +6,9 @@ package org.example.plugin.util.misc;
  * Provides a method to scan text for color codes prefixed with an ampersand ({@code &}) and replace them with the
  * appropriate Minecraft color code format using the section sign ({@code §}) symbol.
  *
- * @see <a href="https://github.com/AleksandarHaralanov">Aleksandar's GitHub</a>
+ * @see <a href="https://github.com/alx-mp4">Aleks' GitHub</a>
  *
- * @author Aleksandar Haralanov (@AleksandarHaralanov)
+ * @author Aleks (@alx-mp4)
  */
 public final class ColorUtil {
 

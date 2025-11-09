@@ -3,6 +3,6 @@
 main: org.example.plugin.Plugin
 version: 1.0.0
 name: INSERT_NAME
-author: INSERT_AUTHOR
-website: INSERT_WEBSITE
-description: INSERT_DESCRIPTION
+author: OPTIONAL_INSERT_AUTHOR
+website: OPTIONAL_INSERT_WEBSITE
+description: OPTIONAL_INSERT_DESCRIPTION
