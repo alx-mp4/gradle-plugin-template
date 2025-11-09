@@ -1,7 +1,13 @@
-import java.util.regex.Matcher
-
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'org.example'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -9,44 +15,35 @@ repositories {
 }
 
 dependencies {
-    implementation files("libs/craftbukkit-1060.jar")
+    compileOnly files("libs/craftbukkit-1060.jar")
 }
 
-File ymlFile = file('src/main/resources/plugin.yml') as File
-String ymlText = ymlFile.text
-Matcher versionMatcher = (ymlText =~ /version:\s*(\S+)/)
-if (versionMatcher.find()) version = versionMatcher.group(1)
+def yml = file('src/main/resources/plugin.yml').text
+def m = (yml =~ /(?m)^\s*version:\s*["']?([^"'#\s]+)["']?/)
+if (m.find()) version = m.group(1)
 
-tasks.build { dependsOn tasks.clean }
-
-tasks.register('cleanBuild') {
-    group = 'custom'
-    dependsOn 'clean', 'build'
+tasks.shadowJar {
+    archiveClassifier.set('')
+    mergeServiceFiles()
 }
 
-def pluginsPath = 'INSERT_ABSOLUTE_PATH_TO_SERVER_PLUGINS_FOLDER'
+tasks.build { dependsOn tasks.shadowJar }
+
+tasks.register('cleanShadowJar') {
+    group = 'shadow'
+    dependsOn 'clean', 'shadowJar'
+}
+
+def pluginsPath = 'D:/Beta/CB1060/plugins/'
 
 tasks.register("deletePluginJar", Delete) {
-    group = 'custom'
+    group = 'shadow'
     delete(files(pluginsPath + "${project.name}-${project.version}.jar"))
-    // Or just ${project.name}.jar depending on how you've set it down below
 }
 
 tasks.register('replacePluginJar', Copy) {
-    group = 'custom'
+    group = 'shadow'
     from 'build/libs'
     into pluginsPath
-    dependsOn 'clean', 'build', 'deletePluginJar'
-}
-
-jar {
-    manifest {
-        attributes(
-                'Implementation-Title': "${project.name}",
-                'Implementation-Version': "${project.version}"
-        )
-    }
-
-    archiveFileName = "${project.name}-${project.version}.jar"
-    // archiveFileName = "${project.name}.jar" - If you wish to exclude the version from the .jar file name
+    dependsOn 'clean', 'shadowJar', 'deletePluginJar'
 }
