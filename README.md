@@ -96,8 +96,8 @@ Once you finish developing your plugin, follow these steps to build and deploy i
   - Copy the new `.jar` directly into the server’s `plugins` directory
 - Once it completes, simply start your Minecraft b1.7.3 server to load the updated plugin.
 
-> [!IMPORTANT]
-> Set the pluginsPath variable in your build.gradle to point to your server’s plugins folder, for example:
+> [!CRITICAL]
+> Set the `pluginsPath` variable in your `build.gradle` to point to your server’s plugins folder, for example:
 > 
 > `def pluginsPath = 'C:/MinecraftServer/plugins/'`
 
